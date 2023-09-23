@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from "next/image";
 
 export default function ActionButton({
   color,
@@ -6,15 +6,21 @@ export default function ActionButton({
   inactiveIcon,
   isActive,
   handleClick,
+  type,
 }: {
   color: string;
   activeIcon: string;
   inactiveIcon: string;
   isActive?: boolean;
   handleClick?: () => void;
+  type?: "button" | "submit";
 }) {
   return (
-    <button onClick={handleClick} className={`${color} w-[34px] h-[34px] rounded-full shadow-action flex items-center justify-center`}>
+    <button
+      onClick={handleClick}
+      type={type || "button"}
+      className={`${color} w-[34px] h-[34px] rounded-full shadow-action flex items-center justify-center`}
+    >
       <Image
         src={isActive ? activeIcon : inactiveIcon}
         alt="action icon"

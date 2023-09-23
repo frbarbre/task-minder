@@ -1,26 +1,25 @@
-import TestClear from './TestClear';
-import TestCreate from './TestCreate';
-import { Task, User } from '@/types';
-import TestTask from './TestTask';
-import Sort from './sort/Sort';
-import Filter from './filter/Filter';
+import TestClear from "./TestClear";
+import TestCreate from "./TestCreate";
+import { Task, UserT } from "@/types";
+import TestTask from "./TestTask";
+import Toolbar from "./Toolbar";
 
 export default function Main({
   userInfo,
   tasks,
   searchParams,
 }: {
-  userInfo: User;
+  userInfo: UserT;
   tasks: Task[];
   searchParams: { filter: string };
 }) {
-  if (userInfo.sortMethod === 'dueDate') {
+  if (userInfo.sortMethod === "dueDate") {
     tasks.sort((a, b) => {
       if (a.dueDate > b.dueDate) return 1;
       if (a.dueDate < b.dueDate) return -1;
       return 0;
     });
-  } else if (userInfo.sortMethod === 'priority') {
+  } else if (userInfo.sortMethod === "priority") {
     tasks.sort((a, b) => {
       if (a.priority > b.priority) return -1;
       if (a.priority < b.priority) return 1;
@@ -28,12 +27,17 @@ export default function Main({
     });
   }
 
+  const projectCatagories = tasks.map((task) => task.catagory);
+
   return (
     <>
-      <div className="flex gap-[24px] items-center">
-        <Filter filters={userInfo.catagories} searchParams={searchParams} />
-        <Sort userId={userInfo._id} currentSortMethod={userInfo.sortMethod} />
-      </div>
+      <Toolbar
+        catagories={userInfo.catagories}
+        searchParams={searchParams}
+        userId={userInfo._id}
+        sortMethod={userInfo.sortMethod}
+        projectCatagories={projectCatagories}
+      />
       {tasks?.length !== 0 && (
         <div className="flex flex-col gap-4">
           {tasks.map((task) => (

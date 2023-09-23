@@ -1,9 +1,11 @@
-'use server';
+"use server";
 
-import { revalidatePath } from 'next/cache';
-import User from '../models/user.model';
+import { revalidatePath } from "next/cache";
+import User from "../models/user.model";
 
-import { connectToDB } from '../mongoose';
+import { connectToDB } from "../mongoose";
+import { UserT } from "@/types";
+import { nanoid } from "nanoid";
 
 export async function fetchUser(userId: string) {
   try {
@@ -59,15 +61,21 @@ export async function updateUser({
 
 export async function updateCatagories(
   userId: string,
-  catagories: { name: string }[],
+  catagories: string[],
   path: string
 ) {
   try {
     connectToDB();
 
+    const newCatagories = catagories.map((catagory) => {
+      return {
+        name: catagory,
+      };
+    });
+
     await User.findOneAndUpdate(
       { _id: userId },
-      { catagories },
+      { catagories: newCatagories },
       { upsert: true }
     );
 
@@ -77,7 +85,11 @@ export async function updateCatagories(
   }
 }
 
-export async function setSortMethod(userId: string, sortMethod: string, path: string) {
+export async function setSortMethod(
+  userId: string,
+  sortMethod: string,
+  path: string
+) {
   try {
     connectToDB();
 
