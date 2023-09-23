@@ -33,7 +33,7 @@ export default function Button({
           onMouseLeave={() => setIsMouseOver(false)}
         >
           <Image
-            src={!isMouseOver ? '/button.png' : '/button-hover.png'}
+            src={!isMouseOver ? '/button.svg' : '/button-hover.svg'}
             alt="button"
             width={600}
             height={53}

@@ -2,8 +2,8 @@ import TestClear from './TestClear';
 import TestCreate from './TestCreate';
 import { Task, User } from '@/types';
 import TestTask from './TestTask';
-import Sort from './Sort';
-import Filter from './Filter';
+import Sort from './sort/Sort';
+import Filter from './filter/Filter';
 
 export default function Main({
   userInfo,
@@ -14,7 +14,6 @@ export default function Main({
   tasks: Task[];
   searchParams: { filter: string };
 }) {
-    
   if (userInfo.sortMethod === 'dueDate') {
     tasks.sort((a, b) => {
       if (a.dueDate > b.dueDate) return 1;
@@ -31,8 +30,10 @@ export default function Main({
 
   return (
     <>
-      <Filter filters={userInfo.catagories} />
-      <Sort userId={userInfo._id} />
+      <div className="flex gap-[24px] items-center">
+        <Filter filters={userInfo.catagories} searchParams={searchParams} />
+        <Sort userId={userInfo._id} currentSortMethod={userInfo.sortMethod} />
+      </div>
       {tasks?.length !== 0 && (
         <div className="flex flex-col gap-4">
           {tasks.map((task) => (

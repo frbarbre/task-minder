@@ -1,4 +1,4 @@
-import Button from '@/components/Button';
+import Button from '@/components/shared/Button';
 import { updateUser } from '@/lib/actions/user.actions';
 import { currentUser } from '@clerk/nextjs';
 import Image from 'next/image';

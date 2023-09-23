@@ -20,6 +20,7 @@ const config: Config = {
       },
       boxShadow: {
         dark: '0px 4px 32px rgba(0, 0, 0, 0.04)',
+        action: '0px 4px 4px 0px rgba(0, 0, 0, 0.04)',
       },
     },
   },

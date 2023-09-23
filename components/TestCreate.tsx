@@ -1,7 +1,7 @@
 'use client';
 
 import { createTask } from '@/lib/actions/tasks.actions';
-import Button from './Button';
+import Button from './shared/Button';
 import { updateCatagories } from '@/lib/actions/user.actions';
 
 export default function TestCreate({ userId }: { userId: string }) {
@@ -29,7 +29,7 @@ export default function TestCreate({ userId }: { userId: string }) {
         },
         {
           name: 'fitness',
-        }
+        },
       ],
       '/'
     );
